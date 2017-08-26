@@ -1,6 +1,6 @@
 use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
-use std::time::Duration;
+
 
 type Job<T> = Message<T>;
 pub enum Message<T> {
@@ -38,7 +38,7 @@ impl<T> ThreadPool<T> where T: Send + 'static{
                             }
                         }
                     }
-                    thread::sleep(Duration::from_millis(s));
+
                 }
             )
         }).collect::<Vec<_>>();
@@ -80,9 +80,9 @@ fn threads() {
         if let Ok(s) = tp.result.recv() {
             println!("Result: {}", s);
             c += 1;
-        } else {
-            thread::sleep(Duration::from_millis(10));
-        }
+        } 
+
+        
         if c == 100 {
             break;
         }
